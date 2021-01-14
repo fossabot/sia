@@ -1,0 +1,7 @@
+module.exports.choose = require('./choose')
+module.exports.covid = require('./covid')
+module.exports.help = require('./help')
+module.exports.ping = require('./ping')
+module.exports.profile = require('./profile')
+module.exports.river = require('./river')
+module.exports.register = require('./register')
