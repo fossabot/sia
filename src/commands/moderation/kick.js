@@ -32,7 +32,7 @@ module.exports.execute = async (
 })
 )
 
-    m.edit({ embed: embed })
+    m.edit({ content: message.member, embed })
 },
 )
 }

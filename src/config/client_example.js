@@ -1,15 +1,26 @@
 module.exports = {
   webhook: {
-    error: {
-      id: "",
-      token: "",
-    },
+      error: {
+        id: "",
+        token:
+          "",
+      },
+      command: {
+        id: "",
+        token:
+        ""
+      },
+      guild: {
+        id: "",
+        token: 
+        ""
+      }
   },
 
   //github: 'push github link',
   app: {
     messageCacheMaxSize: 50,
-    presence: { activity: { name: "리아" } },
+    presence: { activity: { name: "시아" } },
   },
 
   shard: {

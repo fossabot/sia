@@ -2,8 +2,9 @@ const config = require("../config")
 const commands = {}
 const locale = require("../locale").ko
 
-commands.liah = require("./misc")
 commands.develop = require("./develop")
+commands.info = require("./info")
+commands.misc = require("./misc")
 commands.moderation = require("./moderation")
 
 module.exports.categorys = commands

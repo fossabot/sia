@@ -1,25 +1,31 @@
 {
-  "name": "liah",
+  "name": "sia",
   "version": "0.0.1",
-  "description": "",
+  "description": "discord bot sia",
   "main": "index.js",
   "scripts": {
     "r": "cd src && node index.js"
   },
-  "author": "CwihteKJ",
-  "license": "GNUv3",
+  "author": "waffle5140",
+  "license": "",
   "dependencies": {
     "@wonderbot/format-date": "^1.0.2",
     "@wonderbot/ms": "^1.0.0",
     "@wonderbot/utils": "^1.0.1",
     "axios": "^0.21.1",
+    "canvas": "^2.6.1",
     "discord.js": "^12.5.1",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
     "inko": "^1.1.1",
     "knex": "^0.21.14",
     "moment": "^2.29.1",
     "moment-duration-format": "^2.3.2",
     "mysql": "^2.18.1",
+    "node-fetch": "^2.6.1",
+    "node-pre-gyp": "^0.17.0",
     "request": "^2.88.2",
+    "url": "^0.11.0",
     "uuid": "^8.3.2"
   }
 }

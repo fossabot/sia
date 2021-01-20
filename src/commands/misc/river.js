@@ -6,7 +6,7 @@
         _tools,
         knex
       ) => {
-        
+        const axios = require('axios')
         axios.get("http://hangang.dkserver.wo.tc/").then(function (x) {
         message.channel.send(locale.wait).then((m) => {
           let C = x.data.temp
@@ -21,7 +21,7 @@
                 })
               )
       
-              m.edit({ embed: embed })
+              m.edit({ content: message.member, embed })
             })
         })
         })

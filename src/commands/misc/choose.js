@@ -6,13 +6,19 @@
       _tools,
       knex
     ) => {
-      
+      const config = require("../../config")
     
       message.channel.send(locale.wait).then((m) => {
-        if (args.length < 3) return m.edit(`알맞은 사용법 : ${config.prefix}골라 (단어1) (단어2)... `)
-        let words = args.slice(1)
+        let msg = message.content.split(" ")
+        
+        let args = msg.slice(2)
+        
+        if (args.length < 2) return m.edit(`알맞은 사용법 : ${config.client.prefix}골라 (단어1) (단어2)... `)
+        let words = args
+        
         let random = Math.floor(Math.random() * words.length)
         let result = words[random]
+        
         knex("users")
           .select("*")
           .limit(1)
@@ -25,7 +31,7 @@
               })
             )
     
-            m.edit({ embed: embed })
+            m.edit({ content: message.member, embed })
           })
       })
     }

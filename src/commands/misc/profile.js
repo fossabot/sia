@@ -4,18 +4,20 @@
     locale,
     embed,
     _tools,
-    knex
+    knex,
+    args
   ) => {
     
   
     message.channel.send(locale.wait).then((m) => {
-      let user =
-      args[1] !== undefined
+      let member =
+      message.data.args !== undefined
         ? message.mentions.users.first()
           ? message.mentions.users.first()
-          : message.client.users.cache.get(args[1])
+          : message.client.users.cache.get(message.data.args)
         : message.author
-        let img = user.displayAvatarURL({ dynamic: true, size: 1024, format: "png"});
+        if(member == undefined) member = message.author
+        let img = member.displayAvatarURL({ size: 1024, format: "png"});
       knex("users")
         .select("*")
         .limit(1)
@@ -23,13 +25,13 @@
           embed.addField(
             locale.commands.profile.this,
             locale.commands.profile.return.bind({
-              uesr: user,
+              user: member.username,
             })
           )
           
             embed.setImage(img)
   
-          m.edit({ embed: embed })
+          m.edit({ content: message.member, embed })
         })
     })
   }

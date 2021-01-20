@@ -8,6 +8,12 @@ module.exports.execute = async (
     props,
     data
   ) => {
+    var u = (
+      await knex
+          .select('*')
+          .from('total')
+          .where({ user: "유저" })
+  )[0]
     if (
       (await knex.select("*").from("users").where({ id: message.author.id }))
         .length > 0
@@ -33,7 +39,11 @@ module.exports.execute = async (
         }),
         true
       )
-  
+      let today = new Date();
+      let year = today.getFullYear(); // 년도
+      let month = today.getMonth() + 1;  // 월 
+      let date = today.getDate();  // 날짜
+      const time = year + '년 ' + month + '월 ' + date + '일 '  
       const filter = (m) =>
         m.content === locale.commands.register.code &&
         m.author.id === message.author.id
@@ -52,10 +62,18 @@ module.exports.execute = async (
           await data.register.splice(data.register.indexOf(message.author.id), 1)
           await knex
             .insert({
+              name: message.author.username,
               id: message.author.id,
               enter: Math.round(new Date() / 1000),
+              money: 0,
+              command: 0,
+              time: time,
             })
             .from("users")
+            await knex.update({ users: Number(u['users']) + 1}) .where({ user: "유저" }).from('total')
+            let total = date - 1
+            const yesterday = year + '년 ' + month + '월 ' + total + '일'
+            await knex('daily').insert({ id: message.author.id, time: yesterday, level: 0}) 
           return message.reply(locale.commands.register.thanks)
         })
         .catch(async (collected) => {

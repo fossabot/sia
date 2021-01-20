@@ -1,68 +1,60 @@
-      module.exports.execute = async (
-        client,
-        message,
-        locale,
-        embed,
-        _tools,
-        knex
-      ) => {
-        
-       const { inspect } = require('util')
-          const dev = require('../../config/client')
 
-        if(message.author.id !== `${dev.owners}`) return message.channel.send(`봇 개발자 전용 명령어입니다.`)
-        const commands = args.slice(2)
-if (
-    commands.includes("client.token") &&
-    commands.includes("message")
-  ) {
-    return message.channel.send("봇의 토큰을 유출 할 수는 없습니다.")
-  }
+/* eslint-disable no-unused-vars */
+module.exports.execute = async (
+  client,
+  message,
+  locale,
+  embed,
+  tools,
+  knex,
+  props,
+  data
+) => {
+  if (!message.data.args) return message.reply(locale.error.usage(message.data.cmd, message.data.prefix))
+    
   if (
-      commands.includes("process.exit") 
+      message.data.args.includes('client.token') &&
+  message.data.args.includes('message')
   ) {
-      return message.channel.send("봇을 종료할 수 없습니다.")
+      return message.channel.send('Sending Token??')
   }
-  if (
-      commands < 1
-  ) {
-      return message.channel.send("실행할 구문을 적어주세요!")
-  }
-  try {
-        message.channel.send(locale.wait).then((m) => {
-          
-          const result = inspect(evaled, { depth: 0})
-          const type = typeof(evaled)
-          knex("users")
-            .select("*")
-            .limit(1)
-            .then(() => {
-              embed.addField(
-                locale.commands.eval.this,
-                locale.commands.eval.return.bind({
-                  commands: commands,
-                  result: result,
-                  type: type,
-                })
-              )
-      
-              m.edit({ embed: embed })
-            })
-        })
-      } catch (error) {
-        console.log(error)
-        message.channel.send(`에러가 발생하였습니다\n${error}`)
-      }
-      }
-      module.exports.props = {
+  message.reply('Evaling...').then(async m => {
+      const result = new Promise(resolve => resolve(eval(message.data.args)))
+
+      return result
+          .then(output => {
+              if (typeof output !== 'string')
+                  output = require('util').inspect(output, {
+                      depth: 0
+                  })
+              if (output.includes(client.token))
+                  output = output.replace(new RegExp(client.token, 'gi'), '(accesstoken was hidden)')
+              if (output.length > 1500)
+                  console.log(output), (output = output.slice(0, 1500) + '\n...')
+              return m.edit('**INPUT**\n```js\n' + message.data.args + '```\n**OUTPUT**\n```js\n' + output + '```')
+          })
+          .catch(error => {
+              console.error(error)
+              error = error.toString()
+              
+              if (error.includes(client.token))
+                  error = error.replace(new RegExp(client.token, 'gi'), '(accesstoken was hidden)')
+              if (error.length > 1500)
+                  console.log(error), (error = error.slice(0, 1500) + '\n...')
+              return m.edit('**INPUT**\n```js\n' + message.data.args + '```\n**OUTPUT**\n```js\n' + error + '```')
+
+          })
+  })
+}
+module.exports.props = {
         name: "eval",
   perms: "dev",
   alias: ["실행", "cmd", "script", "이블", "js"],
   args: [
     {
-      name: "script",
-      type: "text",
-    },
+        name: 'script',
+        type: 'text'
+    }
   ],
   hide: true,
 }

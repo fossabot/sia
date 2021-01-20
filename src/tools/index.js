@@ -7,6 +7,8 @@ module.exports.bot = {
   customEmbed: require("./bot/customEmbed"),
 }
 
+module.exports.lib = require('./lib')
+
 require("@wonderbot/format-date")
 
 Object.keys(require("@wonderbot/utils")).forEach((t) => {

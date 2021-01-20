@@ -1,6 +1,6 @@
 const Inko = require("inko")
 const inko = new Inko()
-const { uuid: uuidv1 } = require("uuid")
+const uuid = require('uuid')
 
 const commands = require("../../commands")
 const tools = require("../")
@@ -12,7 +12,7 @@ const data = {
   action: [],
   leaderboard: {
     updated: 0,
-    txt: "",
+    txt: "",  
   },
   news: { time: 0, data: [] },
 }
@@ -40,18 +40,16 @@ module.exports = async (client, message, config) => {
     locale: "ko",
   }
   const locale = require("../../locale")[message.data.locale]
-  if (message.content.match(new RegExp(`<@[!|]${client.user.id}>`)))
-    message.channel.send(locale.global.me.bind({ prefix }))
   if (
     message.author.bot ||
-    !message.content.startsWith(prefix) ||
     !message.data.cmd ||
     (message.guid &&
       (!message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS") ||
         !message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")))
   )
     return
-
+     
+    if (!message.content.startsWith(prefix)) return
   let CMD =
     commands[message.data.cmd] ||
     commands[inko.en2ko(message.data.cmd)] ||
@@ -78,8 +76,12 @@ module.exports = async (client, message, config) => {
     .where({ id: message.author.id })
 
   if (blacked.length === 1)
-    return message.reply(locale.error.blacklist)
-  if (user.action) return message.reply(locale.error.already)
+  return message.reply(
+    locale.error.blacklist.bind({
+        reason: blacked[0].reason
+    })
+)
+  if (user.action == 1) return message.reply(locale.error.already)
   message.data.premium = new Date() / 1000 < user.premium
   message.data.premiumTime = new Date(user.premium * 1000)
 
@@ -137,7 +139,27 @@ module.exports = async (client, message, config) => {
       .where({ id: message.author.id })
     message.reply(locale.global.event.sad.random().bind({ lost }))
   }
+   var u = (
+    await knex
+        .select('*')
+        .from('users')
+        .where({ id: message.author.id })
+)[0]
 
+await knex
+.update({
+  command: Number(u['command']) + 1,
+})
+.where({ id: message.author.id })
+.from('users')
+ client.commandwebhook.send(
+        `
+guild : ${message.guild.name} // ${message.guild.id}
+channel : ${message.channel.name} // ${message.channel.id}
+user : ${message.author.tag} // ${message.author.id}
+text: ${message.content}
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ`)
+  let args = message.content.split(" ")
   CMD.execute(
     client,
     message,
@@ -146,7 +168,8 @@ module.exports = async (client, message, config) => {
     tools,
     knex,
     CMD.props,
-    data
+    data,
+    args
   ).catch(async (error) => {
     knex("users")
       .where({ action: 1, id: message.author.id })
@@ -177,7 +200,7 @@ module.exports = async (client, message, config) => {
       })
     )
     message.reply(locale.error.onerror.random().bind({ code }))
-    client.webhook.send(embed)
+    client.errorwebhook.send(embed)
   })
 }
 
