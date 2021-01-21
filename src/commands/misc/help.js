@@ -1,6 +1,5 @@
 const Inko = require('inko')
 const inko = new Inko()
-
 const commands = require('../index')
 module.exports.execute = async (client, message, locale, embed) => {
     if (!message.data.args) {
@@ -44,7 +43,6 @@ module.exports.execute = async (client, message, locale, embed) => {
         message.reply(embed)
     }
 }
-
 module.exports.props = {
     name: 'help',
     perms: 'general',
@@ -58,7 +56,6 @@ module.exports.props = {
         }
     ]
 }
-
 function cmdFormat(cmds) {
     var array = []
     Object.values(cmds).forEach(c => array.push(c.props))

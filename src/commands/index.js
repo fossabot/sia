@@ -6,6 +6,7 @@ commands.develop = require("./develop")
 commands.info = require("./info")
 commands.misc = require("./misc")
 commands.moderation = require("./moderation")
+commands.events = require("./events")
 
 module.exports.categorys = commands
 console.log("Ready for commands.")

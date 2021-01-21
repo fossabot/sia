@@ -6,7 +6,6 @@
     _tools,
     knex
   ) => {
-  
     message.channel.send(locale.wait).then((m) => {
       const time = new Date()
       knex("users")

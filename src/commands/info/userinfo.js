@@ -12,18 +12,14 @@ module.exports.execute = async (
     function game(game){
         const name = game.name
         const type = game.type
-
         const gamearray = locale.commands.userinfo.gametypes
         let b
         let a=name.toString().toLowerCase()
         const res = emoji.game.find(el=> a.includes(el.query))
         if(res) b = res.emoji 
         else return locale.commands.userinfo.nogame
-        return b+' **'+name+'**'+` ${gamearray[type]} ${res.desc ? `\n${res.desc.bind({ details: game.details, state: game.state})}` : ''}`
-        
-        
+        return b+' **'+name+'**'+` ${gamearray[type]} ${res.desc ? `\n${res.desc.bind({ details: game.details, state: game.state})}` : ''}`   
     }
-
     function status(name){
         let a; let b; let c
         a=name.toString().toLowerCase()
@@ -31,19 +27,15 @@ module.exports.execute = async (
         else if(a === 'idle') { b = emoji.idle; c=locale.commands.userinfo.idle }
         else if(a === 'dnd') { b = emoji.dnd;c=locale.commands.userinfo.dnd }
         else if(a === 'offline') { b = emoji.offline;c=locale.commands.userinfo.offline }
-        else{ b = emoji.streaming; c=locale.commands.userinfo.streaming }
-                        
+        else{ b = emoji.streaming; c=locale.commands.userinfo.streaming }                   
         return `${b} ${c}`
-    } 
-
+    }
     const lower = message.data.args.toLowerCase().toString()
     function getuser(callback) {
         if (message.data.args.length===0) return callback(message.member)
         if (message.mentions.members.first()) return callback(message.mentions.members.first())
         const mems = message.guild.members.cache
-        const getmem = mems.filter(a => a === lower || a.id === lower || a.displayName.toLowerCase().includes(lower) || a.user.username.toLowerCase() === lower || a.user.tag.toLowerCase() === lower || a.user.discriminator.toLowerCase() === lower).map(a => a)
-
-       
+        const getmem = mems.filter(a => a === lower || a.id === lower || a.displayName.toLowerCase().includes(lower) || a.user.username.toLowerCase() === lower || a.user.tag.toLowerCase() === lower || a.user.discriminator.toLowerCase() === lower).map(a => a)  
         if (getmem.length === 1) {
             return callback(getmem[0])
         } else if (getmem.length > 1) {
@@ -128,6 +120,12 @@ module.exports.execute = async (
   module.exports.props = {
     name: "userinfo",
     perms: "general",
-    alias: ["유저정보"],
-    args: [],
-  }
+    alias: ["유저정보", "userinfo"],
+    args: [
+        {
+        name: 'user',
+        type: 'user/id',
+        required: false
+        }
+    ],
+}

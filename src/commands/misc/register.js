@@ -83,7 +83,6 @@ module.exports.execute = async (
         })
     }
   }
-  
   module.exports.props = {
     name: "register",
     perms: "general",

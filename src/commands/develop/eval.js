@@ -1,5 +1,3 @@
-
-/* eslint-disable no-unused-vars */
 module.exports.execute = async (
   client,
   message,
@@ -11,7 +9,6 @@ module.exports.execute = async (
   data
 ) => {
   if (!message.data.args) return message.reply(locale.error.usage(message.data.cmd, message.data.prefix))
-    
   if (
       message.data.args.includes('client.token') &&
   message.data.args.includes('message')
@@ -20,9 +17,8 @@ module.exports.execute = async (
   }
   message.reply('Evaling...').then(async m => {
       const result = new Promise(resolve => resolve(eval(message.data.args)))
-
       return result
-          .then(output => {
+          .then( async (output) => {
               if (typeof output !== 'string')
                   output = require('util').inspect(output, {
                       depth: 0
@@ -36,7 +32,6 @@ module.exports.execute = async (
           .catch(error => {
               console.error(error)
               error = error.toString()
-              
               if (error.includes(client.token))
                   error = error.replace(new RegExp(client.token, 'gi'), '(accesstoken was hidden)')
               if (error.length > 1500)

@@ -18,7 +18,6 @@ module.exports = {
             desc: '제목: **{details}**\n아티스트: {state}'
         }
     ],
-    // Status
     online: '<:online:799574631488946186>',
     idle: '<:idle:799574650287292418>',
     dnd: '<:dnd:799574669371244544>',

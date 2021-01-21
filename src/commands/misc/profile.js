@@ -7,8 +7,6 @@
     knex,
     args
   ) => {
-    
-  
     message.channel.send(locale.wait).then((m) => {
       let member =
       message.data.args !== undefined
@@ -28,21 +26,19 @@
               user: member.username,
             })
           )
-          
             embed.setImage(img)
-  
           m.edit({ content: message.member, embed })
         })
     })
   }
   module.exports.props = {
-    name: "프로필",
+    name: "profile",
     perms: "general",
     alias: ["프로필", "profile"],
     args: [
       {
         name: 'user',
-        type: 'userid',
+        type: 'user/id',
         required: false
     }
     ],

@@ -1,5 +1,4 @@
 const config = require("./index")
-
 const perm = [
   {
     name: "general",
@@ -23,6 +22,12 @@ const perm = [
     name: "kick",
     required: {
       perms: ["KICK_MEMBERS"],
+    },
+  },
+  {
+    name: "clear",
+    required: {
+      perms: ["MANAGE_MESSAGES"],
     },
   },
   {

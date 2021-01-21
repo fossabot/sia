@@ -1,5 +1,3 @@
-const { UserFlags } = require('discord.js')
-
     module.exports.execute = async (
         client,
         message,
@@ -61,7 +59,7 @@ const { UserFlags } = require('discord.js')
 }
         )}
       module.exports.props = {
-        name: "블랙",
+        name: "black",
         perms: "general",
         alias: ["블랙", "black"],
         args: [

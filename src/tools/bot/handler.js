@@ -1,7 +1,6 @@
 const Inko = require("inko")
 const inko = new Inko()
 const uuid = require('uuid')
-
 const commands = require("../../commands")
 const tools = require("../")
 const knex = tools.database
@@ -16,7 +15,6 @@ const data = {
   },
   news: { time: 0, data: [] },
 }
-
 module.exports = async (client, message, config) => {
   client.shard.fetchClient = async (props) => {
     let arr = []
@@ -27,7 +25,6 @@ module.exports = async (client, message, config) => {
     return arr
   }
   const embed = new require("./embed")(client, message)
-
   const prefix = config.client.prefix
   message.data = {
     raw: message.content,
@@ -48,17 +45,22 @@ module.exports = async (client, message, config) => {
         !message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")))
   )
     return
-     
     if (!message.content.startsWith(prefix)) return
   let CMD =
     commands[message.data.cmd] ||
     commands[inko.en2ko(message.data.cmd)] ||
     commands[inko.ko2en(message.data.cmd)]
   if (!CMD) return
-
   if (!config.client.owners.includes(message.author.id) && !client.onlineMode)
     return message.reply(locale.error.offline)
-  const user = (await knex("users").where({ id: message.author.id }))[0]
+   client.commandwebhook.send(
+          `
+   guild : ${message.guild.name} // ${message.guild.id}
+  channel : ${message.channel.name} // ${message.channel.id}
+  user : ${message.author.tag} // ${message.author.id}
+  text: ${message.content}
+  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ`)
+    const user = (await knex("users").where({ id: message.author.id }))[0]
   if (!user)
     return commands["register"].execute(
       client,
@@ -70,6 +72,18 @@ module.exports = async (client, message, config) => {
       CMD.props,
       data
     )
+      var u = (
+      await knex
+          .select('*')
+          .from('users')
+          .where({ id: message.author.id })
+  )[0]
+  await knex
+  .update({
+    command: Number(u['command']) + 1,
+  })
+  .where({ id: message.author.id })
+  .from('users')
   let blacked = await knex
     .select("*")
     .from("blacklist")
@@ -84,8 +98,6 @@ module.exports = async (client, message, config) => {
   if (user.action == 1) return message.reply(locale.error.already)
   message.data.premium = new Date() / 1000 < user.premium
   message.data.premiumTime = new Date(user.premium * 1000)
-
-  // Check cooldown
   if (
     data.cooldown[message.author.id] &&
     Number(data.cooldown[message.author.id]) > Number(new Date()) &&
@@ -100,7 +112,6 @@ module.exports = async (client, message, config) => {
       })
     )
   }
-
   if (
     message.guild &&
     !message.member.hasPermission(CMD.props.perms.required.perms)
@@ -120,7 +131,6 @@ module.exports = async (client, message, config) => {
         perms: CMD.props.perms.name,
       })
     )
-
   data.cooldown[message.author.id] = new Date(Number(new Date()) + 2000)
   if (
     !client.users.cache.get(message.author.id) ||
@@ -129,7 +139,6 @@ module.exports = async (client, message, config) => {
     client.users.fetch(message.author.id)
     if (message.guild) message.guild.members.fetch(message.author.id)
   }
-
   if (message.channel.type === "dm" && !CMD.props.dm)
     return message.reply("해당 명령어는 DM에서 사용할 수 없습니다.")
   if (user.money >= 1e19) {
@@ -139,26 +148,6 @@ module.exports = async (client, message, config) => {
       .where({ id: message.author.id })
     message.reply(locale.global.event.sad.random().bind({ lost }))
   }
-   var u = (
-    await knex
-        .select('*')
-        .from('users')
-        .where({ id: message.author.id })
-)[0]
-
-await knex
-.update({
-  command: Number(u['command']) + 1,
-})
-.where({ id: message.author.id })
-.from('users')
- client.commandwebhook.send(
-        `
-guild : ${message.guild.name} // ${message.guild.id}
-channel : ${message.channel.name} // ${message.channel.id}
-user : ${message.author.tag} // ${message.author.id}
-text: ${message.content}
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ`)
   let args = message.content.split(" ")
   CMD.execute(
     client,
@@ -203,7 +192,6 @@ text: ${message.content}
     client.errorwebhook.send(embed)
   })
 }
-
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min)) + min
 }

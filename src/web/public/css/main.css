@@ -1,14 +1,22 @@
 
+@font-face {
+  font-family: OpenSans-Regular;
+  src: url("../fonts/AppleSDGothicNeoL.ttf");
+}
+
+body,
+html {
+  height: 100%;
+  font-family: sans-serif;
+}
 /* navbar 스타일 */
 ul {
   list-style-type: none;
-
   margin: 0;
   padding: 0;
   overflow: hidden;
   /* border: 1px solid #e7e7e7; */
   background-color: black;
-  
   position: sticky;
   top: 0;
   -ms-user-select: none;
@@ -26,7 +34,7 @@ li {
 
 li a {
   display: block;
-  color: #C2C1CB;
+  color: #ECF0F1;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -144,6 +152,7 @@ table thead tr {
   height: 60px;
   background: #76D7C4;
 }
+
 table tbody tr {
   height: 50px;
 }
@@ -167,19 +176,19 @@ table th.r {
   text-align: center;
 }
 
+
 .table100-head th {
+  font-family: OpenSans-Regular;
   font-size: 18px;
   color: #fff;
   line-height: 1.2;
   font-weight: unset;
 }
-
 tbody tr:nth-child(even) {
-  background-color: #5DADE2;
   color: black;
 }
-
 tbody tr {
+  font-family: OpenSans-Regular;
   font-size: 15px;
   color: #808080;
   line-height: 1.2;
@@ -187,8 +196,7 @@ tbody tr {
 }
 
 tbody tr:hover {
-  color: black;
-  background-color: #5DADE2;
+  color: white;
   cursor: pointer;
 }
 
@@ -246,6 +254,7 @@ tbody tr:hover {
     margin-bottom: 0;
   }
   table tbody tr td:before {
+    font-family: OpenSans-Regular;
     font-size: 14px;
     color: #999999;
     line-height: 1.2;
@@ -278,8 +287,7 @@ tbody tr:hover {
   .column2,
   .column3 {
     width: 100%;
-  }
-
+  }  
   tbody tr {
     font-size: 14px;
   }

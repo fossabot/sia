@@ -1,9 +1,6 @@
 const Inko = require("inko")
 const inko = new Inko()
-
-const config = require("../config")
 const commands = require("../commands/index.js")
-
 module.exports = {
   language: {
     english: "Korean",
@@ -19,7 +16,6 @@ module.exports = {
     event: {
         good: ['지나가던 행인이 당신에게 반해서 {add}원을 받았습니다', '길을 가다가 {add}원 짜리 수표 한 장을 주웠습니다.', '당신이 제작한 발가락 긁기 기계가 주목을 받아 {add}원을 받았습니다', '길을 가다 동전을 주워 {add}원을 획득했습니다'],
         sad: ['이런... 길을 가다가 {lost}원을 도둑 맞았습니다...', '저런... 수표 한 장이 물 속에 떨어져 {lost}원을 잃었습니다...', '이럴수가..! 사용하시던 원더은행의 데이터베이스가 해킹당해 {lost}원이 시공속으로 사라졌습니다.', '5252 믿고 있었다구... 오이맨의 최면에 걸려 {lost}원을 기부했습니다.', '디스코드 인기 아이돌 산군의 앨범을 사면서 {lost}원을 지불 했습니다']
-
     }
 },
   commands: {
@@ -71,12 +67,11 @@ module.exports = {
         return: 
         "현재 한강온도: \`{river}℃\`입니다!"
     },
-    daily: {
-      CMDDESC: "오늘 하루 레벨을 올립니다",
-      this: "출석체크",
-      return: 
-      "테스트입니다",
-    },
+     shardinfo: {
+            current: '해당 길드 샤드 정보',
+            desc:
+        '#{id}번 샤드(분리 프로세스) \n```prolog\n#{id} : Guilds {guild}, Users about {user}, Ram {ram}MiB, Ping {ping}ms \n마지막 정보 패치: {last}```\n\n다른 샤드 정보도 디스코드에 표시하기는 너무 길군요 [이곳](https://wonderbot.xyz/shards) 에서 확인할 수 있습니다.'
+        },
     userinfo: {
       gametypes: { PLAYING: '하는 중', LISTENING: '듣는 중', WATCHING: '보는 중', STREAMING: '방송 중' },
       online: '온라인',
@@ -170,6 +165,30 @@ module.exports = {
       return:
       "{user} 을(를) 성공적으로 킥하셨습니다!\n 사유 : {reason}",
     },
+    welcomechannel: {
+      CMDDESC: "멤버가 입장했을때 메시지를 전송할 채널을 설정합니다!",
+      this: "입장채널",
+      return:
+      "입장채널을 {name} 채널로 설정하였습니다!",
+    },
+    welcomemessage: {
+      CMDDESC: "멤버가 입장했을때 보낼 메시지를 설정합니다!",
+      this: "입장메시지",
+      return: 
+      "입장메시지를 \n`{text}`\n 로 설정했습니다!",
+    },
+    byechannel: {
+      CMDDESC: "멤버가 퇴장했을때 메시지를 전송할 채널을 설정합니다!",
+      this: "퇴장채널",
+      return:
+      "퇴장채널을 {name} 채널로 설정하였습니다!",
+    },
+    byemessage: {
+      CMDDESC: "멤버가 퇴장했을때 보낼 메시지를 설정합니다!",
+      this: "퇴장메시지",
+      return: 
+      "퇴장메시지를 \n`{text}`\n 로 설정했습니다!",
+    },
      register: {
       CMDDESC: "봇 서비스에 가입합니다!",
       message:
@@ -205,15 +224,15 @@ module.exports = {
     ],
     noperm: "당신은 이 명령어를 실행할 권한이 없습니다.\n요구 권한 : {perms}",
     process: "이미 해당 작업을 진행중입니다. 작업을 마치고 실행해 주세요!",
-    more: "저보다 돈도 많은 양반이 너무 조금 거는거아니에요?ㅠㅠ",
+    more: "저보다 돈도 많으신 분이 너무 조금 거는거아니에요?ㅠㅠ",
     blacklist:
       "당신은 시아 서비스 사용이 금지되었습니다.\n사유 : {reason}\n문의 및 이의 제기는 지원서버에서 하실 수 있습니다.\n 지원서버 : https://discord.gg/bPNdfeUT7M",
     cooldown:
       "명령어 사용이 쿨타임중입니다.\n`{time}`초 후에 사용 가능합니다!",
-    botperm: "이 명령어를 실행하기 위해서는 봇에게 {perms} 권한이 요구됩니다.",
+    botperm: "이 명령어를 실행하기 위해서는 봇에게 {perms} 권한이 요구됩니다!",
     timeout: "시간이 초과되어 취소되었습니다.",
     nouser: "가입되어있지 않은 유저입니다.",
-    already: "다른 작업이 진행중입니다. 작업을 완료한 후 명령어를 시도하세요.",
+    already: "다른 작업이 진행중입니다. 작업을 완료한 후 명령어를 시도하세요!",
     usage: function (cmd, prefix) {
       var text = ""
       var desc = ""
@@ -293,9 +312,9 @@ perm: {
     MANAGE_EMOJIS: '이모티콘 관리하기'
 }
 }
-
 const usageNames = {
     option: '옵션',
+    mention: '맨션',
     number: '숫자',
     money: '돈',
     text: '텍스트',
@@ -304,6 +323,7 @@ const usageNames = {
     count: '수량',
     script: '스크립트',
     'user/text': '유저 또는 텍스트',
+    channel: '채널',
     delivery: '택배사',
     bill: '운송장',
     item: '아이템',

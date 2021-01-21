@@ -20,14 +20,13 @@
                   river: C,
                 })
               )
-      
               m.edit({ content: message.member, embed })
             })
         })
         })
       }
       module.exports.props = {
-        name: "한강",
+        name: "river",
         perms: "general",
         alias: ["한강", "river"],
         args: [],
