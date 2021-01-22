@@ -35,7 +35,7 @@ module.exports.execute = async (
 )}
             module.exports.props = {
             name: "ban",
-            perms: "ban",
+            perms: "멤버 차단하기",
             alias: ["밴", "벤", "ban"],
             args: [
             {

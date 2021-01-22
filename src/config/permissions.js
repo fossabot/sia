@@ -7,31 +7,31 @@ const perm = [
     },
   },
   {
-    name: "admin",
+    name: "관리자",
     required: {
       perms: ["ADMINISTRATOR"],
     },
   },
   {
-    name: "ban",
+    name: "멤버 차단하기",
     required: {
       perms: ["BAN_MEMBERS"],
     },
   },
   {
-    name: "kick",
+    name: "멤버 추방하기",
     required: {
       perms: ["KICK_MEMBERS"],
     },
   },
   {
-    name: "clear",
+    name: "메시지 관리",
     required: {
       perms: ["MANAGE_MESSAGES"],
     },
   },
   {
-    name: "dev",
+    name: "개발자",
     required: {
       perms: [],
       id: config.client.owners,

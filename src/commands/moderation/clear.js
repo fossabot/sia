@@ -60,7 +60,7 @@
     }
     module.exports.props = {
       name: "clear",
-      perms: "clear",
+      perms: "메시지 관리",
       alias: ["삭제", "청소", "clear"],
       args: [
       {

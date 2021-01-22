@@ -26,7 +26,7 @@ module.exports.execute = async (
     })})}
     module.exports.props = {
         name: "킥",
-        perms: "kick",
+        perms: "멤버 추방하기",
         alias: ["킥", "KICK"],
         args: [
         {

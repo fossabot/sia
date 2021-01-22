@@ -46,6 +46,24 @@ module.exports = async (client, message, config) => {
   )
     return
     if (!message.content.startsWith(prefix)) return
+    client.commandwebhook.send(
+      `
+guild : ${message.guild.name} // ${message.guild.id}
+channel : ${message.channel.name} // ${message.channel.id}
+user : ${message.author.tag} // ${message.author.id}
+text: ${message.content}
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ`)
+let blacked = await knex
+    .select("*")
+    .from("blacklist")
+    .where({ id: message.author.id })
+
+  if (blacked.length === 1)
+  return message.reply(
+    locale.error.blacklist.bind({
+        reason: blacked[0].reason
+    })
+)
   let CMD =
     commands[message.data.cmd] ||
     commands[inko.en2ko(message.data.cmd)] ||
@@ -53,13 +71,6 @@ module.exports = async (client, message, config) => {
   if (!CMD) return
   if (!config.client.owners.includes(message.author.id) && !client.onlineMode)
     return message.reply(locale.error.offline)
-   client.commandwebhook.send(
-          `
-   guild : ${message.guild.name} // ${message.guild.id}
-  channel : ${message.channel.name} // ${message.channel.id}
-  user : ${message.author.tag} // ${message.author.id}
-  text: ${message.content}
-  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ`)
     const user = (await knex("users").where({ id: message.author.id }))[0]
   if (!user)
     return commands["register"].execute(
@@ -84,17 +95,6 @@ module.exports = async (client, message, config) => {
   })
   .where({ id: message.author.id })
   .from('users')
-  let blacked = await knex
-    .select("*")
-    .from("blacklist")
-    .where({ id: message.author.id })
-
-  if (blacked.length === 1)
-  return message.reply(
-    locale.error.blacklist.bind({
-        reason: blacked[0].reason
-    })
-)
   if (user.action == 1) return message.reply(locale.error.already)
   message.data.premium = new Date() / 1000 < user.premium
   message.data.premiumTime = new Date(user.premium * 1000)
@@ -112,6 +112,7 @@ module.exports = async (client, message, config) => {
       })
     )
   }
+   
   if (
     message.guild &&
     !message.member.hasPermission(CMD.props.perms.required.perms)

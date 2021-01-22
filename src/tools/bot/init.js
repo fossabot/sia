@@ -80,7 +80,7 @@ module.exports = class sia {
         })
     client.on("message", async (message) => {
       tools.bot.handler(client, message, config, devMode)
-  })
+    })
   client.on('guildMemberAdd', async member => {
     const guild = (
       await knex
@@ -93,7 +93,7 @@ module.exports = class sia {
     const channel = member.guild.channels.cache.get(guild.welcomechannelid)
     if(!guild.welcomechannelmessage) return
     const welcomemessage = guild.welcomechannelmessage
-    channel.send(welcomemessage)
+    channel.send(welcomemessage.bind({ 유저: member, 유저수: member.guild.memberCount, 서버: member.guild.name, 길드: member.guild.name, }))
 })
 client.on('guildMemberRemove', async member => {
   const guild = (
@@ -107,7 +107,7 @@ if(!guild.byechannelid) return
       const channel = member.guild.channels.cache.get(guild.byechannelid)
       if(!guild.byechannelmessage) return
       const byemessage = guild.byechannelmessage
-      channel.send(byemessage)
+    channel.send(byemessage.bind({ 유저: member, 유저수: member.guild.memberCount, 서버: member.guild.name, 길드: member.guild.name, }))
 })
     client.on("guildCreate", async (guild) => {
       if (guild.shardID !== client.guilds.cache.first().shardID) return

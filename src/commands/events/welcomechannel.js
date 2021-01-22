@@ -27,7 +27,7 @@ module.exports.execute = async (
   }
   module.exports.props = {
     name: "welcomechannel",
-    perms: "admin",
+    perms: "관리자",
     alias: ["입장채널", "welcomechannel"],
     args: [
       {

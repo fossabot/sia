@@ -147,6 +147,12 @@ module.exports = {
       return: 
       "이름 : {name}\n사유 : {reason}\n아이디 : {id}\n날짜: {time}\n처리자: {dev}"
     },
+    addbadwords: {
+      CMDDESC: "개발자 전용 명령어",
+      this: "블랙단어추가",
+      return:
+      "`{text}`\n을(를) 블랙 단어에 추가하였습니다.",
+    },
     ban: {
       CMDDESC: "유저를 밴합니다!",
       this: "밴",
@@ -175,7 +181,7 @@ module.exports = {
       CMDDESC: "멤버가 입장했을때 보낼 메시지를 설정합니다!",
       this: "입장메시지",
       return: 
-      "입장메시지를 \n`{text}`\n 로 설정했습니다!",
+      "입장메시지를 \n**{text}**\n 로 설정했습니다!",
     },
     byechannel: {
       CMDDESC: "멤버가 퇴장했을때 메시지를 전송할 채널을 설정합니다!",
@@ -187,7 +193,7 @@ module.exports = {
       CMDDESC: "멤버가 퇴장했을때 보낼 메시지를 설정합니다!",
       this: "퇴장메시지",
       return: 
-      "퇴장메시지를 \n`{text}`\n 로 설정했습니다!",
+      "퇴장메시지를 \n**{text}**\n 로 설정했습니다!",
     },
      register: {
       CMDDESC: "봇 서비스에 가입합니다!",
