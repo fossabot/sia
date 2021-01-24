@@ -1,6 +1,6 @@
 module.exports = {
     check: '<:check:799591118143619102>',
-    loading: '<:loading:677818976797065254>',
+    loading: '<a:loading:802091012276486145>',
     gookbap: '<:gookbap:677905040706371598>',
     bot: '<:bot:799588626160680991>',
     //Games
@@ -23,5 +23,4 @@ module.exports = {
     dnd: '<:dnd:799574669371244544>',
     offline: '<:offline:799574685264117800>',
     steaming: '<:streaming:799574669371244544>',
-
 }

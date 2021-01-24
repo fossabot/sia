@@ -66,14 +66,10 @@ module.exports.execute = async (
               id: message.author.id,
               enter: Math.round(new Date() / 1000),
               money: 0,
-              command: 0,
               time: time,
             })
             .from("users")
             await knex.update({ users: Number(u['users']) + 1}) .where({ user: "유저" }).from('total')
-            let total = date - 1
-            const yesterday = year + '년 ' + month + '월 ' + total + '일'
-            await knex('daily').insert({ id: message.author.id, time: yesterday, level: 0}) 
           return message.reply(locale.commands.register.thanks)
         })
         .catch(async (collected) => {

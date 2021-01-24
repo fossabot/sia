@@ -3,6 +3,7 @@ const inko = new Inko()
 const uuid = require('uuid')
 const commands = require("../../commands")
 const tools = require("../")
+const Discord = require('discord.js')
 const knex = tools.database
 const data = {
   register: [],
@@ -47,12 +48,8 @@ module.exports = async (client, message, config) => {
     return
     if (!message.content.startsWith(prefix)) return
     client.commandwebhook.send(
-      `
-guild : ${message.guild.name} // ${message.guild.id}
-channel : ${message.channel.name} // ${message.channel.id}
-user : ${message.author.tag} // ${message.author.id}
-text: ${message.content}
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ`)
+      `\`\`\`guild : ${message.guild.name} (${message.guild.id}) // author : ${message.author.tag} (${message.author.id}) // message: ${message.content}\`\`\``
+    )
 let blacked = await knex
     .select("*")
     .from("blacklist")
@@ -83,18 +80,6 @@ let blacked = await knex
       CMD.props,
       data
     )
-      var u = (
-      await knex
-          .select('*')
-          .from('users')
-          .where({ id: message.author.id })
-  )[0]
-  await knex
-  .update({
-    command: Number(u['command']) + 1,
-  })
-  .where({ id: message.author.id })
-  .from('users')
   if (user.action == 1) return message.reply(locale.error.already)
   message.data.premium = new Date() / 1000 < user.premium
   message.data.premiumTime = new Date(user.premium * 1000)

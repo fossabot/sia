@@ -9,6 +9,9 @@ module.exports.execute = async (
         message.channel.send(locale.wait).then((m) => {
         const user = message.mentions.members.first()
         if (!user) return m.edit(`킥 할 사람을 맨션해주세요!`)
+        if(user == message.guild.me) return m.edit(`제가 싫으셧나요...ㅠ`)
+        if(user == message.member) return m.edit(`자신을 밴 할순 없습니다!`)
+        if(user.hasPermission('KICK_MEMBER')) return m.edit(`${user.user.tag} 님의 권한이 높습니다.`)
     let reason =  message.content.replace(message.data.prefix, '').split(' ').splice(2).join(' ')
     if(!reason) reason = "사유 없음"
     user.kick({ reason: reason })

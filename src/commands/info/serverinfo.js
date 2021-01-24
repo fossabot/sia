@@ -9,10 +9,15 @@ module.exports.execute = async (
     _tools,
     knex,
 ) => {
+    message.channel.send(locale.wait).then((m) => {
+        knex("users")
+          .select("*")
+          .limit(1)
+          .then(() => {
     embed.setTitle(locale.commands.serverinfo.serverinfo.bind({ guild: message.guild.name }))
     embed.addField('ID', message.guild.id, true)
     embed.addField(locale.commands.serverinfo.region, locale.commands.serverinfo.regionList[message.guild.region], true)
-    embed.addField(locale.commands.serverinfo.owner, (await client.users.fetch(message.guild.ownerID)).tag, true)
+    embed.addField(locale.commands.serverinfo.owner, message.guild.owner.user.tag, true)
     embed.addField(locale.commands.serverinfo.memberCount, locale.commands.serverinfo.memberDesc.bind({ user: message.guild.memberCount }), true)
     embed.addField(locale.commands.serverinfo.boost, locale.commands.serverinfo.boostDesc.bind({ count: message.guild.premiumSubscriptionCount, level: message.guild.premiumTier }))
     embed.addField(locale.commands.serverinfo.channel, locale.commands.serverinfo.channelDesc.bind({ text: message.guild.channels.cache.filter(r => r.type === 'text').size, category: message.guild.channels.cache.filter(r => r.type === 'category').size, voice: message.guild.channels.cache.filter(r => r.type === 'voice').size }), true)
@@ -25,7 +30,9 @@ module.exports.execute = async (
         embed.attachFiles(new Discord.MessageAttachment(createServerImg(message.guild.nameAcronym), 'attachment://icon.png'))
         embed.setThumbnail('attachment://icon.png')
     }
-    message.reply(embed)
+    m.edit({ content: message.member, embed})
+})
+})
 }
 module.exports.props = {
     name: 'serverinfo',

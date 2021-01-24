@@ -21,7 +21,7 @@ module.exports.execute = async (
               name: channel,
             })
           )
-          m.edit({ embed: embed })
+          m.edit({ content: message.member,embed })
         })
     })
   }

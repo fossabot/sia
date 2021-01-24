@@ -1,6 +1,7 @@
 const Inko = require("inko")
 const inko = new Inko()
 const commands = require("../commands/index.js")
+const { emojis } = require('../tools/lib')
 module.exports = {
   language: {
     english: "Korean",
@@ -86,17 +87,15 @@ module.exports = {
       timeout: '시간이 지나 취소되었습니다! 다시 시도해주세요!',
       nores: '검색결과가 없습니다!',
       username: '유저이름',
-      game: '게임',
-      nogame: '플레이중인 게임이 없습니다!',
       status: '상태',
       unknown: '알 수 없음',
       client: '클라이언트',
-      command: '명령어 사용 수',
+      profile: '프로필',
       created: '계정 생성일',
       joined: '서버 참여일',
       roles: '역할들',
       platform:  {
-          'desktop': '🖥️ 데스크톱',
+          'desktop': '🖥️ 컴퓨터',
           'mobile': '📱 모바일',
           'web': '🌐 웹'
       }
@@ -141,6 +140,19 @@ module.exports = {
             none: '없음',
             more: '외 {count}개 더...'
         },
+    botinfo: {
+      CMDDESC: `시아의 정보를 보여줍니다!`,
+      this: "봇정보",
+      return:
+      `이름ㅤ|ㅤㅤㅤ{name}
+      사이트ㅤ|ㅤㅤ[준비중]({site})
+      코드ㅤ|ㅤㅤㅤ[클릭]({github})
+      코리안봇ㅤ|ㅤ[준비중]({koreanbots})
+      램ㅤ|ㅤㅤㅤㅤ{ram} MB
+      가동시간ㅤ|ㅤ{uptime}
+      서버수ㅤ|ㅤㅤ{guilds}개
+      유저수ㅤ|ㅤㅤ{user}명`,
+    },
     black: {
       CMDDESC: "개발자 전용 명령어",
       this: "블랙",
@@ -195,6 +207,12 @@ module.exports = {
       return: 
       "퇴장메시지를 \n**{text}**\n 로 설정했습니다!",
     },
+    logchannel: {
+      CMDDESC: "메시지 로크를 전송할 채널을 설정합니다!",
+      this: "로그채널",
+      return: 
+      "로그채널을 {name} 채널로 설정하였습니다!",
+    },
      register: {
       CMDDESC: "봇 서비스에 가입합니다!",
       message:
@@ -212,12 +230,17 @@ module.exports = {
       thanks:
         "봇의 약관을 동의해주셔서 감사합니다! 이제 모든 기능을 이용하실 수 있습니다!",
     },
+    unregister:{
+      CMDDESC: "봇 서비스 가입을 취소합니다!",
+      this: "가입취소",
+      wait: "정말로 시아 서비스 가입을 취소하실 건가요? 맞으시면 ⭕를, 취소하실려면 ❌를 눌러주세요!",
+    },
     link: {
       tos: "https://naver.com",
       privacy: "https://youtube.com/",
     },
   },
-  wait: "잠시만 기다려주세요!",
+  wait: `${emojis.loading} 잠시만 기다려주세요!`,
   error: {
     nodesc: "설명이 없습니다!",
     toLong: "출력 결과가 너무 길어 출력할 수 없습니다!",

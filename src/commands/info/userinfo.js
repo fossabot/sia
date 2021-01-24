@@ -1,4 +1,3 @@
-
 module.exports.execute = async (
     client,
     message,
@@ -8,18 +7,12 @@ module.exports.execute = async (
     _tools,
     knex
 ) => {
+    message.channel.send(locale.wait).then((m) => {
+        knex("users")
+          .select("*")
+          .limit(1)
+          .then(() => {
     const emoji = tools.lib.emojis
-    function game(game){
-        const name = game.name
-        const type = game.type
-        const gamearray = locale.commands.userinfo.gametypes
-        let b
-        let a=name.toString().toLowerCase()
-        const res = emoji.game.find(el=> a.includes(el.query))
-        if(res) b = res.emoji 
-        else return locale.commands.userinfo.nogame
-        return b+' **'+name+'**'+` ${gamearray[type]} ${res.desc ? `\n${res.desc.bind({ details: game.details, state: game.state})}` : ''}`   
-    }
     function status(name){
         let a; let b; let c
         a=name.toString().toLowerCase()
@@ -79,18 +72,11 @@ module.exports.execute = async (
     }
     //Func End
     getuser(async (user) => {
-        // console.log(knex)
-        // const userknex = (await knex("users").where({ id: user.id }))[0]
-        // let commandnumber = userknex.command
-        //  if(commandnumber == null) commandnumber = 0
         if (user === 'timeout') return message.channel.send(locale.commands.userinfo.timeout)
         if (!user) return message.channel.send(locale.commands.userinfo.nores)
         embed.setThumbnail(user.user.displayAvatarURL())
         embed.addField(locale.commands.userinfo.username, `${user.user.tag} ${user.user.bot ? emoji.bot : ''}`, true)
         embed.addField('ID', user.id)
-        let gg = user.user.presence.activities.filter(r=> r.type !== 'CUSTOM_STATUS').reverse()
-        if(gg.length === 0) embed.addField(locale.commands.userinfo.game, locale.commands.userinfo.nogame, true)
-        else embed.addField(locale.commands.userinfo.game,user.user.presence.game !== null ? `${game(gg[0])}`:'없음')
         embed.addField(locale.commands.userinfo.status ,status(user.user.presence.status),true)
         function getClient(presence,callback){
             if(presence ===null) return callback(null)
@@ -102,17 +88,14 @@ module.exports.execute = async (
 
             embed.addField(locale.commands.userinfo.client, callback || locale.commands.userinfo.unknown, true)
         })
-        // embed.addField(locale.commands.userinfo.command, commandnumber,true)
+        embed.addField(locale.commands.userinfo.profile, `[클릭](${user.user.displayAvatarURL()})`,true)
         embed.addField(locale.commands.userinfo.created,`${user.user.createdAt.toLocaleDateString("korea")}`,true)
         embed.addField(locale.commands.userinfo.joined,`${user.joinedAt.toLocaleDateString("korea")}`,true)
         embed.addField(locale.commands.userinfo.roles, message.guild.member(user.user).roles.cache.array().join(', ').length > 1000 ? message.guild.member(user.user).roles.cache.array().splice(0, 42).join(', ') + locale.commands.serverinfo.more.bind({ count:  message.guild.member(user.user).roles.cache.array().length - 42 }) :  message.guild.member(user.user).roles.cache.array().join(', '))
-        message.channel.send(embed)
-        
-    // let a = message.author.presence.activities[0].name;let b = message.author.presence.activities[0].type;${a}를 ${b}하는중
+        m.edit({ content: message.member, embed})
+    })
+})
 
-    
-    
-    
     })}   
 
 

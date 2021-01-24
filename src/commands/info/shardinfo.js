@@ -6,6 +6,11 @@ module.exports.execute = async (
     tools,
     knex
 ) => {
+    message.channel.send(locale.wait).then( async (m) => {
+        knex("users")
+          .select("*")
+          .limit(1)
+          .then( async () => {
     const hmm = await knex('shards').where({
         id: client.guilds.cache.first().shardID
     })
@@ -26,8 +31,11 @@ module.exports.execute = async (
             ram: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
         })
     )
-    message.reply(embed)
+    m.edit({ content: message.member, embed})
+})
+    })
 }
+
 module.exports.props = {
     name: 'shardinfo',
     perms: 'general',

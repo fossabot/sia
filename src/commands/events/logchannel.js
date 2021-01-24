@@ -10,25 +10,25 @@ module.exports.execute = async (
       const channel = message.mentions.channels.first()
       const channelid = channel.id
       const guildid = message.guild.id
-         await knex('event').update({ byechannelid: channelid }).where({ guildid: guildid })
+         await knex('event').update({ logchannelid: channelid }).where({ guildid: guildid })
         knex("users")
         .select("*")
         .limit(1)
         .then(() => {
           embed.addField(
-            locale.commands.byechannel.this,
-            locale.commands.byechannel.return.bind({
+            locale.commands.logchannel.this,
+            locale.commands.logchannel.return.bind({
               name: channel,
             })
           )
-          m.edit({ content: message.member,embed })
+          m.edit({ content: message.member, embed })
         })
     })
   }
   module.exports.props = {
-    name: "byechannel",
+    name: "logchannel",
     perms: "관리자",
-    alias: ["퇴장채널", "byechannel"],
+    alias: ["로그채널", "logchannel"],
     args: [
       {
         name: 'mention',
