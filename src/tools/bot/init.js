@@ -248,6 +248,8 @@ if(!guild.byechannelid) return
       const hello = await client.shard.fetchClientValues("guilds.cache.size")
       var u = (await tools.database.select('*').from('total').where({ guild: "서버" }))[0]
       await knex.update({ guilds: Number(u['guilds']) - 1}) .where({ guild: "서버" }).from('total')
+      await knex("event").del().where({ guildid: guild.id})
+      await knex("guilds").del().where({ guildid: guild.id})
       const invites = await guild
         .fetchInvites()
         .then((r) => r.first())

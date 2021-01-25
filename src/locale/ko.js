@@ -146,7 +146,7 @@ module.exports = {
         'vip-us-east': ':flag_us: VIP 미국 동부'
     },
     filterName: '유해 미디어 콘텐츠 필터',
-            filter: {'DISABLED': '**미디어 콘텐츠를 스캔하지 않아요!', 'MEMBERS_WITHOUT_ROLES': '**역할 없는 멤버의 미디어 콘텐츠를 스캔해요!**\n신뢰하는 멤버에게 역할을 부여하는 서버에 권장하는 옵션이에요!', 'ALL_MEMBERS': '**모든 멤버의 미디어 콘텐츠를 스캔해요.**\n아주 깨끗한 채팅 환경을 원할시 권장하는 옵션이에요!'},
+            filter: {'DISABLED': '**미디어 콘텐츠를 스캔하지 않아요!**', 'MEMBERS_WITHOUT_ROLES': '**역할 없는 멤버의 미디어 콘텐츠를 스캔해요!**\n신뢰하는 멤버에게 역할을 부여하는 서버에 권장하는 옵션이에요!', 'ALL_MEMBERS': '**모든 멤버의 미디어 콘텐츠를 스캔해요.**\n아주 깨끗한 채팅 환경을 원할시 권장하는 옵션이에요!'},
             roles: '역할',
             emojis: '이모지',
             none: '없음',
@@ -181,13 +181,12 @@ module.exports = {
       CMDDESC: "유저를 밴합니다!",
       this: "밴",
       return: 
-      "{user} 을(를) 밴하는데 성공하셨습니다!\n 사유 : {reason}",
+      "{user}님 을(를) 밴하는데 성공하셨습니다!\n 사유 : {reason}",
     },
     unban: {
       CMDDESC: "유저를 언밴합니다!",
       this: "언밴",
-      return:
-      "<@{user}>를 언밴하는데 성공하였습니다!",
+      return: "{user}님을(를) 언밴하는데 성공하였습니다!",
     },
     clear: {
       CMDDESC: "메시지를 삭제합니다",
@@ -200,6 +199,12 @@ module.exports = {
       this: "킥",
       return:
       "{user} 을(를) 성공적으로 킥하셨습니다!\n 사유 : {reason}",
+    },
+    slowmode: {
+      CMDDESC: "해당 채널의 슬로우 모드를 설정합니다!",
+      this: "슬로우 모드",
+      return:
+      "{channel} 채널의 슬로우 모드를 {number}초로 설정하였습니다!",
     },
     welcomechannel: {
       CMDDESC: "멤버가 입장했을때 메시지를 전송할 채널을 설정합니다!",
@@ -234,8 +239,8 @@ module.exports = {
      register: {
       CMDDESC: "봇 서비스에 가입합니다!",
       message:
-        "이미 가입하셨습니다. 데이터 초기화 및 계약 철회는 {contact} 에서 하실 수 있습니다.",
-      contact: "미지원",
+        "이미 가입하셨습니다. 데이터 초기화 및 계약 철회는 {contact} 명령어로 하실 수 있습니다.",
+      contact: "\`시아야 가입취소\`",
       register: "가입하기",
       tos: "이용약관",
       privacy: "개인정보취급방침",

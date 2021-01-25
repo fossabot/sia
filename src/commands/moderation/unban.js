@@ -7,16 +7,15 @@ module.exports.execute = async (
     knex
   ) => {
     message.channel.send(locale.wait).then((m) => {
-      let userID = message.content.includes('<@!') ? message.content.replace('<@!', '').replace('>', '')
-          : message.content.includes('<@') ? message.content.replace('<@', '').replace('<', '') : '';
+      let user = message.data.arg[0]
+      if(!user) return m.edit(`언밴할 유저를 맨션해주세요!`)
+      let userID = user.replace('<@!', '').replace('>', '')
           if (userID == '') {
             m.edit('잘못된 사용자 ID 또는 멘션입니다.');
             return;
           }
-          
       message.guild.fetchBans().then(bans => {
         let member = bans.get(userID);
-
         if (member == null) {
           m.edit('이 서버에서 밴 당하지 않은 유저입니다.');
           return;
@@ -26,17 +25,17 @@ module.exports.execute = async (
         .select("*")
         .limit(1)
         .then(() => {
-          embed.addField(
-            locale.commands.unban.this,
-            locale.commands.unban.return.bind({
-              user: member.user.username,
-            })
-          )
+        embed.addField(
+              locale.commands.unban.this,
+              locale.commands.unban.return.bind({
+              user: member.user.tag
+              })
+            )
+            m.edit({ content: message.member, embed })
           })
-          m.edit({ embed: embed })
-        })
     })
-  }
+  })
+}
   module.exports.props = {
     name: "unban",
     perms: "멤버 차단하기",

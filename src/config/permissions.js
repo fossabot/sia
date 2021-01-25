@@ -31,6 +31,12 @@ const perm = [
     },
   },
   {
+    name: "채널 관리하기",
+    required: {
+      perms: ["MANAGE_CHANNELS"],
+    },
+  },
+  {
     name: "개발자",
     required: {
       perms: [],

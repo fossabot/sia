@@ -11,7 +11,6 @@ module.exports.execute = async (
     message.channel.send(locale.wait).then((m) => {
         
         var duration = moment.duration(client.uptime).format(" D [일] H [시간] m [분] s [초]")
-        const ram = (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
             client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)'),
@@ -32,7 +31,7 @@ module.exports.execute = async (
                 site: "https://naver.com",
                 github: "https://github.com/kyjkyj080115/sia",
                 koreanbots: "https://naver.com",
-                ram: ram,
+                ram: client.mem,
                 uptime: duration,
                 guilds: totalGuilds,
                 user: totalMembers,
