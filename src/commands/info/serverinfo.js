@@ -1,6 +1,5 @@
-let canvas = require('canvas')
-const Canvas = require('canvas'),
-    Discord = require('discord.js')
+const { createServerImg } = require('../../tools/bot/util')
+const Discord = require('discord.js')
 module.exports.execute = async (
     client,
     message,
@@ -39,17 +38,4 @@ module.exports.props = {
     perms: 'general',
     alias: ['서버정보'],
     args: []
-}
-function createServerImg(text) {
-    canvas = Canvas.createCanvas(200, 200)
-    var context = canvas.getContext('2d')
-    context.beginPath()
-    context.rect(0, 0, 200, 200)
-    context.fillStyle = '#7289DA'
-    context.fill()
-    context.fillStyle = 'white'
-    context.textAlign = 'center'
-    context.textBaseline = 'middle'
-    context.fillText(text, 100, 100, 200)
-    return canvas.toBuffer()
 }

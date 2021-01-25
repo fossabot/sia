@@ -18,9 +18,9 @@ module.exports = {
             desc: '제목: **{details}**\n아티스트: {state}'
         }
     ],
-    online: '<:online:799574631488946186>',
-    idle: '<:idle:799574650287292418>',
+    online: '<:online:802771800701796372>',
+    idle: '<:idle:802771800630362112>',
     dnd: '<:dnd:799574669371244544>',
-    offline: '<:offline:799574685264117800>',
-    steaming: '<:streaming:799574669371244544>',
+    offline: '<:offline:802771800248287274>',
+    steaming: '<:streaming:802771819878416404>',
 }

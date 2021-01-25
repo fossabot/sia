@@ -68,12 +68,29 @@ module.exports = {
         return: 
         "현재 한강온도: \`{river}℃\`입니다!"
     },
+    corona: {
+      CMDDESC: "대한민국 코로나 정보를 보여줍니다!",
+      this: "대한민국 코로나",
+      wait: `${emojis.loading} 잠시만 기다려주세요!(없는 지역을 검색하셨을 경우 이 메시지는 사라지지 않습니다!)`,
+      return:
+      `누적 확진자: {confirm}
+      완치자: {cure}명
+      치료중: {curing}명
+      사망자: {dead}명
+      누적 검사 수: {accumlate}`,
+      returncity:
+      `누적 확진자: {confirm}명
+      완치자: {cure}명
+      치료중: {curing}명
+      사망자: {dead}명
+      10만명 당 발생률: {incidence}명`
+    },
      shardinfo: {
             current: '해당 길드 샤드 정보',
             desc:
         '#{id}번 샤드(분리 프로세스) \n```prolog\n#{id} : Guilds {guild}, Users about {user}, Ram {ram}MiB, Ping {ping}ms \n마지막 정보 패치: {last}```\n\n다른 샤드 정보도 디스코드에 표시하기는 너무 길군요 [이곳](https://wonderbot.xyz/shards) 에서 확인할 수 있습니다.'
         },
-    userinfo: {
+      userinfo: {
       gametypes: { PLAYING: '하는 중', LISTENING: '듣는 중', WATCHING: '보는 중', STREAMING: '방송 중' },
       online: '온라인',
       idle: '자리 비움',
@@ -94,11 +111,6 @@ module.exports = {
       created: '계정 생성일',
       joined: '서버 참여일',
       roles: '역할들',
-      platform:  {
-          'desktop': '🖥️ 컴퓨터',
-          'mobile': '📱 모바일',
-          'web': '🌐 웹'
-      }
   },
   serverinfo: {
     serverinfo: '🏘️ {guild} 서버 정보',
@@ -170,6 +182,12 @@ module.exports = {
       this: "밴",
       return: 
       "{user} 을(를) 밴하는데 성공하셨습니다!\n 사유 : {reason}",
+    },
+    unban: {
+      CMDDESC: "유저를 언밴합니다!",
+      this: "언밴",
+      return:
+      "<@{user}>를 언밴하는데 성공하였습니다!",
     },
     clear: {
       CMDDESC: "메시지를 삭제합니다",
