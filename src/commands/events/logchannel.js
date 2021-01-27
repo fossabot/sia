@@ -8,6 +8,7 @@ module.exports.execute = async (
   ) => {
     message.channel.send(locale.wait).then( async (m) => {
       const channel = message.mentions.channels.first()
+      if(!channel) return m.edit('로그채널로 설정할 채널을 맨션해주세요!')
       const channelid = channel.id
       const guildid = message.guild.id
          await knex('event').update({ logchannelid: channelid }).where({ guildid: guildid })
