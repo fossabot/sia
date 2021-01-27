@@ -9,7 +9,7 @@ module.exports.execute = async (
     const request = message.data.args
     if(!message.data.args) return message.reply(locale.error.usage(message.data.cmd))
     if (request.includes('client.token')&&request.includes('message')){
-        return message.channel.send('토큰을 전송해도 될까요?')
+        return message.channel.send('토큰을 전송할 순 없습니다.')
     }
     exec(request, (error, stdout, stderr) => {
         console.log('Attempting to exec handler: ' + request)

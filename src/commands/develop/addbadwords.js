@@ -6,7 +6,7 @@ module.exports.execute = async (
     _tools,
     knex
   ) => {
-  const prefix = require('../../config').client.prefix
+  const { prefix } = require('../../config').client
     message.channel.send(locale.wait).then( async (m) => {
       const text = message.data.args
         if(!text) return m.edit(`메시지를 적어주세요\n올바른 사용법 : ${prefix}<메시지>`)
@@ -21,7 +21,6 @@ module.exports.execute = async (
               text: text,
             })
           )
-  
           m.edit({ content: message.member,embed })
         })
     })

@@ -32,20 +32,20 @@ module.exports.execute = async (
     )
   }
 )}
-            module.exports.props = {
-            name: "ban",
-            perms: "멤버 차단하기",
-            alias: ["밴", "벤", "ban"],
-            args: [
-            {
-            name: 'user/id',
-            type: 'text',
-            required: true
-            },
-            {
-            name: 'reason',
-            type: 'text',
-            required: false
-            }
-            ],
-            }
+module.exports.props = {
+  name: "ban",
+  perms: "멤버 차단하기",
+  alias: ["밴", "벤", "ban"],
+  args: [
+    {
+    name: 'user/id',
+  type: 'text',
+  required: true
+},
+  {
+    name: 'reason',
+  type: 'text',
+  required: false
+}
+],
+}

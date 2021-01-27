@@ -3,6 +3,7 @@ module.exports = {
     loading: '<a:loading:802091012276486145>',
     gookbap: '<:gookbap:677905040706371598>',
     bot: '<:bot:799588626160680991>',
+    send: '<:send:803251824181248010>',
     //Games
     game: [
         {

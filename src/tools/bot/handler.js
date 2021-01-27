@@ -3,7 +3,6 @@ const inko = new Inko()
 const uuid = require('uuid')
 const commands = require("../../commands")
 const tools = require("../")
-const Discord = require('discord.js')
 const knex = tools.database
 const data = {
   register: [],
@@ -45,6 +44,10 @@ module.exports = async (client, message, config) => {
       (!message.channel.permissionsFor(message.guild.me).has("EMBED_LINKS") ||
         !message.channel.permissionsFor(message.guild.me).has("SEND_MESSAGES")))
   )
+    return
+    if (
+      message.channel.type == "dm"
+    )
     return
     if (!message.content.startsWith(prefix)) return
     client.commandwebhook.send(
@@ -97,7 +100,6 @@ let blacked = await knex
       })
     )
   }
-   
   if (
     message.guild &&
     !message.member.hasPermission(CMD.props.perms.required.perms)
@@ -125,8 +127,6 @@ let blacked = await knex
     client.users.fetch(message.author.id)
     if (message.guild) message.guild.members.fetch(message.author.id)
   }
-  if (message.channel.type === "dm" && !CMD.props.dm)
-    return message.reply("해당 명령어는 DM에서 사용할 수 없습니다.")
   if (user.money >= 1e19) {
     let lost = Math.round(user.money * (getRandomInt(20, 50) / 100))
     await knex("users")
@@ -134,7 +134,6 @@ let blacked = await knex
       .where({ id: message.author.id })
     message.reply(locale.global.event.sad.random().bind({ lost }))
   }
-  let args = message.content.split(" ")
   CMD.execute(
     client,
     message,
@@ -143,8 +142,7 @@ let blacked = await knex
     tools,
     knex,
     CMD.props,
-    data,
-    args
+    data
   ).catch(async (error) => {
     knex("users")
       .where({ action: 1, id: message.author.id })

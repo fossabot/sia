@@ -1,31 +1,38 @@
 module.exports = {
   webhook: {
-      error: {
-        id: "",
-        token:
-          "",
-      },
-      command: {
-        id: "",
-        token:
-        ""
-      },
-      guild: {
-        id: "",
-        token: 
-        ""
-      }
+    error: {
+      id: "아이디",
+      token:
+        "토큰",
+    },
+    command: {
+      id: "아이디",
+      token:
+      "토큰"
+    },
+    guild: {
+      id: "아이디",
+      token: 
+      "토큰"
+    },  
+    ask: {
+      id: "아이디",
+      token:
+      "토큰"
+    }
   },
   app: {
+    presence: { activity: { name: "상매" } },
     messageCacheMaxSize: 50,
-    presence: { activity: { name: "시아" } },
   },
   shard: {
     totalShard: 2,
     respawn: true,
     token: "",
   },
-  token: "",
-  prefix: "!",
-  owners: [],
+  token: "토큰",
+  prefix: "접두사",
+  owners: [
+    "아이디",
+  ],
 }

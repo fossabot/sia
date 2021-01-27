@@ -21,7 +21,7 @@ module.exports = {
 },
   commands: {
     help: {
-      CMDDESC: "도움말 명령어를 표시합니다!",
+      CMDDESC: "시아 명령어의 도움말을 보여줍니다!",
       noCommand: "아쉽지만 해당 명령어는 존재하지 않습니다!",
       commandInfo: "명령어 정보 - {cmd}",
       description: "명령어 설명",
@@ -32,44 +32,38 @@ module.exports = {
       help: "안녕하세요, **시아**입니다!",
       desc:
         "봇을 이용해주셔서 감사합니다. 해당 봇은 [원더 봇 오픈소스](https://github.com/wonderlandpark/wonderbot)를 기반으로 제작되었습니다.",
-      more: "자세한 도움말보기",
+      more: "간단한 도움말보기",
       moreDesc:
         "`{prefix}도움 [명령어]`로 명령어의 사용법을 자세하게 알아볼 수 있습니다!",
       support: "유용한 링크",
       links: "[준비중](https://naver.com/)",
     },
     ping: {
-      CMDDESC: "봇의 지연시간을 확인합니다!",
+      CMDDESC: "시아의 핑을 보여줍니다!",
       pong: "퐁!",
       this: "🏓 퐁!",
       return:
-        "봇 지연시간: {botLatency}ms\nAPI 지연시간: {APILatency}ms\nDB 쿼리 지연시간: {DBLatency}ms",
+        "봇 지연시간: {bot}ms\nAPI 지연시간: {api}ms\nDB 쿼리 지연시간: {db}ms",
     },
     profile: {
-        CMDDESC: "유저의 프로필을 보여줍니다!",
+        CMDDESC: "맨션이나 아이디 유저의 프로필을 보여줍니다!\n(아이디나 맨션을 하지 않았다면 자신의 프로필을 보여줍니다!)",
         this: "프로필",
         return: 
         "{user}님의 프로필입니다!",
     },
     choose: {
-        CMDDESC: "여러개의 단어중 한개를 고릅니다!",
+        CMDDESC: "제시한 단어중 한개를 고릅니다!\n(단어 제한은 없습니다!)",
         this: "골라",
         return: "저는 `{result}`가(이) 좋은거 같습니다!\n단어리스트\n{list}",
     },
-    covid: {
-        CMDDESC: "대한민국 코로나 정보를 보여줍니다!",
-        this: "코로나",
-        return:
-        "{covid}",
-    },
     river: {
-        CMDDESC: "한강 수온을 보여줍니다!",
+        CMDDESC: "현재 한강 수온(물의 온도)를 보여줍니다!",
         this: "한강",
         return: 
         "현재 한강온도: \`{river}℃\`입니다!"
     },
     corona: {
-      CMDDESC: "대한민국 코로나 정보를 보여줍니다!",
+      CMDDESC: "제시한 지역의 코로나 정보를 보여줍니다!\n(지역을 쓰지 않았다면 대한민국 전체의 코로나 정보를 보여줍니다!)",
       this: "대한민국 코로나",
       wait: `${emojis.loading} 잠시만 기다려주세요!(없는 지역을 검색하셨을 경우 이 메시지는 사라지지 않습니다!)`,
       return:
@@ -85,12 +79,28 @@ module.exports = {
       사망자: {dead}명
       10만명 당 발생률: {incidence}명`
     },
+    ask: {
+      CMDDESC: "관리자에게 개선사항 등을 알려줍니다!",
+      this: "문의",
+      wait: "`{text}`\n 내용을 관리자에게 보낼까요?\n의미없는 문의는 제재 대상임을 숙지하여주시기 바랍니다.",
+      return:
+      "`{text}`\n내용으로 관리자에게 전송하였습니다!"
+    },
+    custom : {
+      CMDDESC: "시아와 대화할 문장을 가르칩니다!",
+      this: "배워",
+      wait: "진짜로 `{content}`는 `{reply}`로 저장할까요??\n맞으시면 ⭕를, 취소하실려면 ❌를 눌러주세요!",
+      return:
+      "`{content}` 는 `{reply}` 로 저장하였습니다! 지우시려면 `시아야 잊어` 명령어를 사용해주세요!"
+    },
      shardinfo: {
+       CMDDESC: "시아의 샤드정보를 보여줍니다!",
             current: '해당 길드 샤드 정보',
             desc:
         '#{id}번 샤드(분리 프로세스) \n```prolog\n#{id} : Guilds {guild}, Users about {user}, Ram {ram}MiB, Ping {ping}ms \n마지막 정보 패치: {last}```\n\n다른 샤드 정보도 디스코드에 표시하기는 너무 길군요 [이곳](https://wonderbot.xyz/shards) 에서 확인할 수 있습니다.'
         },
       userinfo: {
+      CMDDESC: "맨션이나 아이디 유저의 정보를 보여줍니다!\n(아이디나 맨션을 하지 않았으면 자신의 정보를 보여줍니다!)",
       gametypes: { PLAYING: '하는 중', LISTENING: '듣는 중', WATCHING: '보는 중', STREAMING: '방송 중' },
       online: '온라인',
       idle: '자리 비움',
@@ -113,6 +123,7 @@ module.exports = {
       roles: '역할들',
   },
   serverinfo: {
+    CMDDESC: "서버의 여러가지 정보를 보여줍니다!\n(메시지를 보낸 서버)",
     serverinfo: '🏘️ {guild} 서버 정보',
     memberCount: '멤버',
     memberDesc: '{user}명',
@@ -178,66 +189,66 @@ module.exports = {
       "`{text}`\n을(를) 블랙 단어에 추가하였습니다.",
     },
     ban: {
-      CMDDESC: "유저를 밴합니다!",
+      CMDDESC: "맨션한 유저를 이 서버에서 밴(차단)합니다!\n(필요한 권한: 멤버 차단하기)",
       this: "밴",
       return: 
       "{user}님 을(를) 밴하는데 성공하셨습니다!\n 사유 : {reason}",
     },
     unban: {
-      CMDDESC: "유저를 언밴합니다!",
+      CMDDESC: "맨션한 유저를 이 서버에서 언밴(차단 해제)합니다!\n(필요한 권한: 멤버 차단하기)",
       this: "언밴",
       return: "{user}님을(를) 언밴하는데 성공하였습니다!",
     },
     clear: {
-      CMDDESC: "메시지를 삭제합니다",
+      CMDDESC: "이 채널의 메시지를 숫자 만큼 삭제합니다!\n(필요한 권한: 메시지 관리하기)",
       this: "삭제",
       return: 
       "{number}개의 메시지를 삭제하셨습니다!\n 이 메시지는 3초뒤 사라집니다!",
     },
     kick: {
-      CMDDESC: "유저를 킥합니다!",
+      CMDDESC: "맨션한 유저를 이 서버에서 킥(추방)합니다!\n(필요한 권한: 멤버 추방하기)",
       this: "킥",
       return:
       "{user} 을(를) 성공적으로 킥하셨습니다!\n 사유 : {reason}",
     },
     slowmode: {
-      CMDDESC: "해당 채널의 슬로우 모드를 설정합니다!",
+      CMDDESC: "`이 채널에 슬로우모드를 설정합니다",
       this: "슬로우 모드",
       return:
       "{channel} 채널의 슬로우 모드를 {number}초로 설정하였습니다!",
     },
     welcomechannel: {
-      CMDDESC: "멤버가 입장했을때 메시지를 전송할 채널을 설정합니다!",
+      CMDDESC: "멤버가 입장했을때 메시지를 보낼 채널을 정합니다!\n(필요한 권한: 관리자)",
       this: "입장채널",
       return:
       "입장채널을 {name} 채널로 설정하였습니다!",
     },
     welcomemessage: {
-      CMDDESC: "멤버가 입장했을때 보낼 메시지를 설정합니다!",
+      CMDDESC: "멤버가 입장했을때 보낼 메시지를 정합니다!\n(필요한 권한: 관리자)",
       this: "입장메시지",
       return: 
       "입장메시지를 \n**{text}**\n 로 설정했습니다!",
     },
     byechannel: {
-      CMDDESC: "멤버가 퇴장했을때 메시지를 전송할 채널을 설정합니다!",
+      CMDDESC: "멤버가 퇴장했을때 메시지를 보낼 채널을 정합니다!\n(필요한 권한: 관리자)",
       this: "퇴장채널",
       return:
       "퇴장채널을 {name} 채널로 설정하였습니다!",
     },
     byemessage: {
-      CMDDESC: "멤버가 퇴장했을때 보낼 메시지를 설정합니다!",
+      CMDDESC: "멤버가 퇴장했을때 보낼 메시지를 정합니다!\n(필요한 권한: 관리자)",
       this: "퇴장메시지",
       return: 
       "퇴장메시지를 \n**{text}**\n 로 설정했습니다!",
     },
     logchannel: {
-      CMDDESC: "메시지 로크를 전송할 채널을 설정합니다!",
+      CMDDESC: "각종 로그를 보낼 채널을 정합니다!\n(필요한 권한: 관리자)",
       this: "로그채널",
       return: 
       "로그채널을 {name} 채널로 설정하였습니다!",
     },
      register: {
-      CMDDESC: "봇 서비스에 가입합니다!",
+      CMDDESC: "시아 서비스에 가입합니다!\n(이미 가입 되있다면 아무런 효과가 없습니다!)",
       message:
         "이미 가입하셨습니다. 데이터 초기화 및 계약 철회는 {contact} 명령어로 하실 수 있습니다.",
       contact: "\`시아야 가입취소\`",
@@ -254,7 +265,7 @@ module.exports = {
         "봇의 약관을 동의해주셔서 감사합니다! 이제 모든 기능을 이용하실 수 있습니다!",
     },
     unregister:{
-      CMDDESC: "봇 서비스 가입을 취소합니다!",
+      CMDDESC: "시아 서비스 가입을 취소합니다!\n(가입되어있지 않다면 \`가입\` 명령어로 넘어갑니다!)",
       this: "가입취소",
       wait: "정말로 시아 서비스 가입을 취소하실 건가요? 맞으시면 ⭕를, 취소하실려면 ❌를 눌러주세요!",
     },

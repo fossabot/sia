@@ -8,12 +8,6 @@ module.exports.execute = async (
     props,
     data
   ) => {
-    var u = (
-      await knex
-          .select('*')
-          .from('total')
-          .where({ user: "유저" })
-  )[0]
     if (
       (await knex.select("*").from("users").where({ id: message.author.id }))
         .length > 0
@@ -69,7 +63,6 @@ module.exports.execute = async (
               time: time,
             })
             .from("users")
-            await knex.update({ users: Number(u['users']) + 1}) .where({ user: "유저" }).from('total')
           return message.reply(locale.commands.register.thanks)
         })
         .catch(async (collected) => {

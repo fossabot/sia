@@ -4,7 +4,6 @@ module.exports = class sia {
     const Discord = require("discord.js")
     const client = new Discord.Client(config.client.app)
     let tools = require("../")
-    const logger = tools.logger
     client.guildwebhook = new Discord.WebhookClient(
       config.client.webhook.guild.id,
       config.client.webhook.guild.token,
@@ -83,27 +82,23 @@ module.exports = class sia {
     })
     client.on('messageUpdate', async (message, oldMessage) => {
       if(message.author.bot) return
-      if(message.content == oldMessage) return
-      if(oldMessage == message.content) return
+      if(oldMessage.content == message.content) return
     const guild = (await knex.select('*').from('event').where({ guildid: message.guild.id }))[0]
     if(!guild) return
     if(!guild.logchannelid) return
     const channel = message.guild.channels.cache.get(guild.logchannelid)
     const embed = new Discord.MessageEmbed()
     embed.setTitle('메시지수정로그')
-    embed.addFields(
-      { name: '메시지주인', value: `${message.author}`},
+    embed.addFields({ name: '메시지주인', value: `${message.author}`},
       { name: '채널', value: `${message.channel}`},
       { name: '메시지바로가기', value: `[클릭](${message.url})`},
       { name: '변경전', value: `${message.content}`},
-      { name: '변경후', value: `${oldMessage}`},
-    )
+      { name: '변경후', value: `${oldMessage}`},)
     embed.setThumbnail(`${message.author.avatarURL()}`)
-    embed.setFooter(`gif라면 같은내용이 전송됬을수도 있습니다`)
+    embed.setFooter(`${message.author.tag}`, message.author.avatarURL())
     embed.setTimestamp(new Date())
     embed.setColor("#93bfe6")
-    channel.send(embed)
-    }) 
+    channel.send(embed)}) 
     client.on('messageDelete', async (message) => {
       const guild = (await knex.select('*').from('event').where({ guildid: message.guild.id }))[0]
     if(!guild) return
@@ -118,18 +113,15 @@ module.exports = class sia {
           if (!result.ok) {
           const embed = new Discord.MessageEmbed()
           embed.setTitle('메시지삭제로그')
-          embed.addFields(
-            { name: '메시지주인', value: `${message.author}`},
+          embed.addFields({ name: '메시지주인', value: `${message.author}`},
             { name: '채널', value: `${message.channel}`},
             { name: '메시지바로가기', value: `[클릭](${message.url})`},
-            { name: '삭제내용', value: `파일`},
-          )
+            { name: '삭제내용', value: `파일`},)
           embed.setThumbnail(`${message.author.avatarURL()}`)
           embed.setFooter(`${message.author.tag}`, message.author.avatarURL())
           embed.setTimestamp(new Date())
           embed.setColor("#93bfe6")
-          return channel.send(embed)
-          }
+          return channel.send(embed)}
           const avatar = await result.buffer();
           const attachment = new MessageAttachment(avatar, message.attachments.array()[0].name);
           if(message.content.length == 0) {
@@ -192,7 +184,6 @@ module.exports = class sia {
     const channel = member.guild.channels.cache.get(guild.welcomechannelid)
     if(!guild.welcomemessage) return
     const welcomemessage = guild.welcomemessage 
-    // channel.send(welcomemessage.bind({ 유저: member, 유저수: member.guild.memberCount, 서버: member.guild.name, 길드: member.guild.name, }))
     channel.send(welcomemessage.bind({ user: member, userID: member.id, 유저: member, 유저아이디: member.id,
       유저수: member.guild.memberCount, memberCount: member.guild.memberCount,
       서버: member.guild.name, 길드: member.guild.name, 서버아이디: member.guild.id, 길드아이디: member.guild.id, guildID: member.guild.id,
@@ -200,12 +191,9 @@ module.exports = class sia {
 })
 client.on('guildMemberRemove', async member => {
   const guild = (
-    await knex
-        .select('*')
-        .from('event')
-        .where({ guildid: member.guild.id })
+    await knex('event').where({ guildid: member.guild.id })
 )[0]
-if(!guild)   
+if(!guild)
 if(!guild.byechannelid) return
       const channel = member.guild.channels.cache.get(guild.byechannelid)
       if(!guild.byemessage) return
@@ -218,8 +206,6 @@ if(!guild.byechannelid) return
     client.on("guildCreate", async (guild) => {
       if (guild.shardID !== client.guilds.cache.first().shardID) return
       const hello = await client.shard.fetchClientValues("guilds.cache.size")
-      var u = (await tools.database.select('*').from('total').where({ guild: "서버" }))[0]
-      await knex.update({ guilds: Number(u['guilds']) + 1}) .where({ guild: "서버" }).from('total')
       await knex("event").insert({ guildid: guild.id })
       const g = await knex("guilds")
       if (!g.find((r) => r.id === guild.id)) {
@@ -246,8 +232,6 @@ if(!guild.byechannelid) return
     client.on("guildDelete", async (guild) => {
       if (guild.shardID !== client.guilds.cache.first().shardID) return
       const hello = await client.shard.fetchClientValues("guilds.cache.size")
-      var u = (await tools.database.select('*').from('total').where({ guild: "서버" }))[0]
-      await knex.update({ guilds: Number(u['guilds']) - 1}) .where({ guild: "서버" }).from('total')
       await knex("event").del().where({ guildid: guild.id})
       await knex("guilds").del().where({ guildid: guild.id})
       const invites = await guild

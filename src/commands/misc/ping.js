@@ -15,9 +15,9 @@
           embed.addField(
             locale.commands.ping.this,
             locale.commands.ping.return.bind({
-              botLatency: m.createdTimestamp - message.createdTimestamp,
-              APILatency: Math.round(client.ws.ping),
-              DBLatency: new Date() - time,
+              bot: m.createdTimestamp - message.createdTimestamp,
+              api: Math.round(client.ws.ping),
+              db: new Date() - time,
             })
           )
   

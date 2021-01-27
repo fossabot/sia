@@ -9,17 +9,15 @@ module.exports.execute = async (
     knex
   ) => {
     message.channel.send(locale.wait).then((m) => {
-        
         var duration = moment.duration(client.uptime).format(" D [일] H [시간] m [분] s [초]")
         const promises = [
             client.shard.fetchClientValues('guilds.cache.size'),
             client.shard.broadcastEval('this.guilds.cache.reduce((acc, guild) => acc + guild.memberCount, 0)'),
-        ];
-        
+        ]
         Promise.all(promises)
             .then(results => {
-                const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0);
-                const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0);
+                const totalGuilds = results[0].reduce((acc, guildCount) => acc + guildCount, 0)
+                const totalMembers = results[1].reduce((acc, memberCount) => acc + memberCount, 0)
         knex("users")
         .select("*")
         .limit(1)
@@ -37,7 +35,6 @@ module.exports.execute = async (
                 user: totalMembers,
             })
           )
-  
           m.edit({ content: locale.commands.ping.pong, embed })
         })
     })

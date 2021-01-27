@@ -1,5 +1,3 @@
-const { URLSearchParams } = require("url")
-
 module.exports.execute = async (
     client,
     message,

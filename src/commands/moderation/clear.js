@@ -50,7 +50,6 @@
                       number: amount
                     })
                   )
-          
                   m.edit({ content: member, embed }).then((msg) => msg.delete({ timeout: 3000 }))
               })
               )})
