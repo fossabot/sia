@@ -25,8 +25,8 @@ module.exports = async (client, message, config) => {
     return arr
   }
   const embed = new require("./embed")(client, message)
-  const prefix = config.client.prefix
-  message.data = {
+  const prefix = (await knex("guilds").where({ id: message.guild.id }))[0].prefix
+  message.data = {  
     raw: message.content,
     arg: message.content.replace(prefix, "").split(" ").slice(1),
     args: message.content.replace(prefix, "").split(" ").slice(1).join(" "),

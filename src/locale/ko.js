@@ -102,7 +102,13 @@ module.exports = {
             desc:
         '#{id}번 샤드(분리 프로세스) \n```prolog\n#{id} : Guilds {guild}, Users about {user}, Ram {ram}MiB, Ping {ping}ms \n마지막 정보 패치: {last}```\n\n다른 샤드 정보도 디스코드에 표시하기는 너무 길군요 [이곳](https://wonderbot.xyz/shards) 에서 확인할 수 있습니다.'
         },
-      userinfo: {
+    prefix: {
+      CMDDESC: "이 서버에서 쓸 시아의 접두사를 정합니다!",
+      this: "접두사",
+      return:
+      "시아의 접두사를 {after} 로 설정하였습니다!\n전 접두사: {before}",
+    },
+    userinfo: {
       CMDDESC: "맨션이나 아이디 유저의 정보를 보여줍니다!\n(아이디나 맨션을 하지 않았으면 자신의 정보를 보여줍니다!)",
       gametypes: { PLAYING: '하는 중', LISTENING: '듣는 중', WATCHING: '보는 중', STREAMING: '방송 중' },
       online: '온라인',
@@ -215,7 +221,7 @@ module.exports = {
       "{user} 을(를) 성공적으로 킥하셨습니다!\n 사유 : {reason}",
     },
     slowmode: {
-      CMDDESC: "`이 채널에 슬로우모드를 설정합니다",
+      CMDDESC: "이 채널에 슬로우모드를 설정합니다",
       this: "슬로우 모드",
       return:
       "{channel} 채널의 슬로우 모드를 {number}초로 설정하였습니다!",

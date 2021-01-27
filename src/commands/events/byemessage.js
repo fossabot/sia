@@ -6,10 +6,9 @@ module.exports.execute = async (
     _tools,
     knex
   ) => {
-  const prefix = require('../../config').client.prefix
     message.channel.send(locale.wait).then( async (m) => {
       const text = message.data.args
-        if(!text) return m.edit(`메시지를 적어주세요\n올바른 사용법 : ${prefix}퇴장메시지 <메시지>`)
+        if(!text) return m.edit(`메시지를 적어주세요\n올바른 사용법 : ${message.data.prefix}퇴장메시지 <메시지>`)
         await knex('event').update({ byemessage: text }).where({ guildid: message.guild.id })
         knex("users")
         .select("*")

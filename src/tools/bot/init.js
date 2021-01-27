@@ -210,7 +210,7 @@ if(!guild.byechannelid) return
       const g = await knex("guilds")
       if (!g.find((r) => r.id === guild.id)) {
         console.log(`[INSERT] NEW GUILD: ${guild.name}`)
-        await knex("guilds").insert({ id: guild.id, name: guild.name })
+        await knex("guilds").insert({ id: guild.id, name: guild.name, prefix: "시아야 " })
       }
       const invites = await guild.fetchInvites().then(r=> r.first()).catch(() => null)
       client.guildwebhook.send(
@@ -232,8 +232,8 @@ if(!guild.byechannelid) return
     client.on("guildDelete", async (guild) => {
       if (guild.shardID !== client.guilds.cache.first().shardID) return
       const hello = await client.shard.fetchClientValues("guilds.cache.size")
-      await knex("event").del().where({ guildid: guild.id})
-      await knex("guilds").del().where({ guildid: guild.id})
+      await knex("event").del().where({ guildid: guild.id })
+      await knex("guilds").del().where({ guildid: guild.id })
       const invites = await guild
         .fetchInvites()
         .then((r) => r.first())

@@ -1,5 +1,5 @@
 create table blacklist (name varchar(255), id varchar(255), reason varchar(255), time varchar(255), dev varchar(255))
 create table users (name varchar(255), id varchar(255), money varchar(255), time varchar(255), action varchar(255), enter varchar(255))
-create table guilds (name varchar(255), id varchar(255))
+create table guilds (name varchar(255), id varchar(255), prefix varchar(255))
 create table event (guildid varchar(255), welcomechannelid varchar(255), welcomemessage varchar(255), byechannelid varchar(255), byemessage varchar(255), logchannelid varchar(255))
 create table shards (id varchar(255), lastupdate varchar(255), guilds varchar(255), users varchar(255), ping varchar(255), memory varchar(255))
