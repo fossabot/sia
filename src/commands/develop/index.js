@@ -1,6 +1,5 @@
 module.exports.blacklist = require('./blacklist')
 module.exports.eval = require('./eval')
-module.exports.addbadwords = require('./addbadwords')
 module.exports.restart = require('./restart')
 module.exports.exec = require('./exec')
 module.exports.askreturn = require('./askreturn')
