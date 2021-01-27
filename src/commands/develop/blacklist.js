@@ -6,7 +6,6 @@
         _tools,
         knex
       )  =>  {
-        var u = (await knex.select('*').from('total').where({ blacklist: "블랙" }))[0]
         message.channel.send(locale.wait).then( async (m) => {
        const config = require('../../config')
           if (!message.data.args)
