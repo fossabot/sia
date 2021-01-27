@@ -12,13 +12,9 @@
         var isNum = !isNaN(amount)
         if (!member.hasPermission(['MANAGE_MESSAGES']))
         return message.channel.send(`해당 유저는 봇의 권한으로 메시지를 삭제할 수 없습니다. 유저권한 및 봇 권한을 다시 확인해주세요.`)
-            if (isNum && (amount <= 0.9 || 99.9 < amount)) {
+            if (!amount||isNum && (amount <= 0.9 || 99.9 < amount) || isNum == false) {
               message.channel.send(`${member}, 1 ~ 99 사이의 숫자를 입력해주세요!`)
               return
-            }
-             else if (isNum == false) {
-            message.channel.send(`${member},1 ~ 99 사이의 \`숫자\`를 입력해주세요!`)
-            return
             }
             else if (!isNum) {
               if (message.content.split("<@").length == 2) {  
