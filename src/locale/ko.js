@@ -93,6 +93,9 @@ module.exports = {
       return:
       "`{content}` 는 `{reply}` 로 저장하였습니다! 지우시려면 `시아야 잊어` 명령어를 사용해주세요!"
     },
+    rockpaperscissors: {
+      CMDDESC: "시아와 가위바위보를 합니다!",
+    },
      shardinfo: {
        CMDDESC: "시아의 샤드정보를 보여줍니다!",
             current: '해당 길드 샤드 정보',

@@ -21,6 +21,7 @@ module.exports.execute = async (client, message, locale, embed) => {
             { name: `시아야 한강`, value: locale.commands.river.CMDDESC},
             { name: `시아야 골라 <예시단어1> <예시단어2> ...`, value: locale.commands.choose.CMDDESC},
             { name: `시아야 코로나 <지역>`, value: locale.commands.corona.CMDDESC},
+            { name: `시아야 가위바위보`, value: locale.commands.rockpaperscissors.CMDDESC},
             { name: `시아야 봇정보`, value: locale.commands.botinfo.CMDDESC},
             { name: `시아야 서버정보`, value: locale.commands.serverinfo.CMDDESC},
             { name: `시아야 유저정보 <맨션 / 유저아이디>`, value: locale.commands.userinfo.CMDDESC},
